@@ -1,5 +1,7 @@
 # 🚀 QA Automation Challenge | Gilvando Matos
 
+![CI](https://github.com/Gilvando21/qa-automation-agi/actions/workflows/ci.yml/badge.svg)
+
 Projeto de automação de testes desenvolvido como solução para desafio técnico, cobrindo **Web, API e Performance**, com foco em boas práticas de engenharia de testes e arquitetura escalável.
 
 ---
