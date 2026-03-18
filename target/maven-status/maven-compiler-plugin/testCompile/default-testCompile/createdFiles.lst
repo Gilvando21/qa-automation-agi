@@ -1,0 +1,4 @@
+base\BaseTest.class
+web\tests\SearchTest.class
+api\DogApiTest.class
+web\pages\BlogPage.class
