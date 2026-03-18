@@ -1,4 +1,3 @@
-
 name: CI
 
 on: [push]
@@ -9,9 +8,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+
     - name: Set up JDK
       uses: actions/setup-java@v3
       with:
+        distribution: 'temurin'
         java-version: '17'
+
     - name: Run tests
       run: mvn clean test
