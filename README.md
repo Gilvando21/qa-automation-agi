@@ -11,8 +11,8 @@ Projeto de automação de testes desenvolvido como solução para desafio técni
 **Gilvando Matos**  
 QA Senior / QA Leader  
 
-🔗 LinkedIn: https://www.linkedin.com/in/gilvando-matos-3a259821/  
-🔗 GitHub: https://github.com/Gilvando21  
+ LinkedIn: https://www.linkedin.com/in/gilvando-matos-3a259821/  
+ GitHub: https://github.com/Gilvando21  
 
 ---
 
@@ -41,12 +41,45 @@ Demonstrar habilidades em:
 - Testes da Dog API
 - Validação de status code e payload
 - Cenários positivos
--  Implementação de retry automático para lidar com instabilidade externa (HTTP 520)
+- Implementação de retry automático para lidar com instabilidade externa (HTTP 520)
 
 ###  Performance
 - Testes com JMeter
 - Execução via CLI
 - Geração de relatório HTML
+- Simulação de carga com comportamento real de usuários
+
+---
+
+##  Performance Testing (JMeter)
+
+Os testes de performance foram implementados utilizando Apache JMeter com foco em simular comportamento real de usuários.
+
+###  Características implementadas
+
+- Execução com múltiplos usuários simultâneos (Thread Group)
+- Dados dinâmicos via CSV Data Set Config
+- Simulação de tempo de usuário (Think Time)
+- Execução em modo non-GUI (mais performático)
+- Geração automática de relatório HTML
+
+###  Como executar
+
+"C:\caminho\para\jmeter\bin\jmeter.bat" -n -t performance-tests/jmeter_performance.jmx -l performance-tests/result.jtl -e -o performance-tests/report
+
+###  Métricas analisadas
+
+- Throughput (requisições por segundo)
+- Tempo médio de resposta
+- Percentis (p90, p95)
+- APDEX (satisfação do usuário)
+
+###  Resultado obtido
+
+- ~6800 requisições executadas
+- 0% de erro
+- Tempo médio ~290ms
+- APDEX > 0.9 (excelente experiência do usuário)
 
 ---
 
@@ -65,17 +98,11 @@ Demonstrar habilidades em:
 
 ##  Como executar
 
-###  Executar testes (Web + API)
 mvn clean test
 
-###  Executar em modo headless
 mvn clean test -Dheadless=true
 
-###  Gerar relatório Allure
 allure serve target/allure-results
-
-###  Executar teste de performance
-jmeter -n -t performance-tests/test-plan.jmx -l result.jtl -e -o report/
 
 ---
 
@@ -83,7 +110,7 @@ jmeter -n -t performance-tests/test-plan.jmx -l result.jtl -e -o report/
 
 - Relatórios interativos com Allure
 - Evidências automáticas (screenshots em falhas)
-- Logs organizados para análise
+- Logs estruturados para análise
 
 ---
 
@@ -116,7 +143,7 @@ Pipeline configurado com GitHub Actions para:
 - Build automático
 - Execução dos testes
 - Validação contínua
-- Pronto para evolução com execução headless e paralela
+- Pronto para evolução com execução paralela
 
 ---
 
@@ -126,6 +153,8 @@ Pipeline configurado com GitHub Actions para:
 ✔ Estrutura escalável e desacoplada  
 ✔ Integração com Allure  
 ✔ Tratamento de instabilidade externa (retry)  
+✔ Testes de performance com dados dinâmicos  
+✔ Métricas reais de experiência do usuário (APDEX)  
 ✔ Código limpo e organizado  
 ✔ Pronto para uso em ambiente real  
 
