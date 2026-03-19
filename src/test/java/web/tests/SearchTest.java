@@ -10,7 +10,6 @@ public class SearchTest extends BaseTest {
 
     @Test
     public void buscaComResultado() {
-        setup();
 
         BlogPage page = new BlogPage(driver);
         page.acessar();
@@ -21,7 +20,6 @@ public class SearchTest extends BaseTest {
 
     @Test
     public void buscaSemResultado() {
-        setup();
 
         BlogPage page = new BlogPage(driver);
         page.acessar();

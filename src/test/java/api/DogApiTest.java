@@ -1,12 +1,12 @@
-
 package api;
 
 import io.restassured.RestAssured;
+import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import utils.ApiUtils;
 
-import static io.restassured.RestAssured.*;
-import static org.hamcrest.Matchers.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class DogApiTest {
 
@@ -17,25 +17,34 @@ public class DogApiTest {
 
     @Test
     public void listarRacas() {
-        given()
-        .when().get("/breeds/list/all")
-        .then().statusCode(200)
-        .body("message", not(empty()));
+
+        Response response = ApiUtils.getWithRetry(
+                RestAssured.baseURI + "/breeds/list/all"
+        );
+
+        assertEquals(200, response.getStatusCode());
+        assertFalse(response.jsonPath().getMap("message").isEmpty());
     }
 
     @Test
     public void imagensPorRaca() {
-        given()
-        .when().get("/breed/hound/images")
-        .then().statusCode(200)
-        .body("message", not(empty()));
+
+        Response response = ApiUtils.getWithRetry(
+                RestAssured.baseURI + "/breed/hound/images"
+        );
+
+        assertEquals(200, response.getStatusCode());
+        assertFalse(response.jsonPath().getList("message").isEmpty());
     }
 
     @Test
     public void imagemAleatoria() {
-        given()
-        .when().get("/breeds/image/random")
-        .then().statusCode(200)
-        .body("message", containsString("http"));
+
+        Response response = ApiUtils.getWithRetry(
+                RestAssured.baseURI + "/breeds/image/random"
+        );
+
+        assertEquals(200, response.getStatusCode());
+        assertTrue(response.jsonPath().getString("message").contains("http"));
     }
 }

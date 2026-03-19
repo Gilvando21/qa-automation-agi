@@ -7,6 +7,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import io.github.bonigarcia.wdm.WebDriverManager;
+
 import java.time.Duration;
 
 import utils.ScreenshotUtil;
@@ -16,12 +17,20 @@ public class BaseTest {
     protected WebDriver driver;
     protected WebDriverWait wait;
 
+    static {
+        //executa apenas uma vez (evita múltiplos drivers)
+        WebDriverManager.chromedriver().setup();
+    }
+
     @BeforeEach
     public void setup() {
-        WebDriverManager.chromedriver().setup();
 
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless=new");
+
+        if ("true".equals(System.getProperty("headless"))) {
+            options.addArguments("--headless=new");
+        }
+
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
 
@@ -34,8 +43,13 @@ public class BaseTest {
     @AfterEach
     public void tearDown() {
         if (driver != null) {
-            ScreenshotUtil.capture(driver);
-            driver.quit();
+            try {
+                ScreenshotUtil.capture(driver);
+            } catch (Exception e) {
+                System.out.println("Erro ao capturar screenshot: " + e.getMessage());
+            } finally {
+                driver.quit(); //suficiente (não precisa close)
+            }
         }
     }
 }
