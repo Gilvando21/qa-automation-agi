@@ -1,4 +1,8 @@
 target/
+performance-tests/report/
+performance-tests/*.jtl
 allure-results/
+allure-report/
 *.log
 *.tmp
+.DS_Store
